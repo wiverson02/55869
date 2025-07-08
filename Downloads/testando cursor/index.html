@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel de Decisão: O Melhor Usado Premium</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Painel de Decisão do Usado Premium</h1>
+            <p class="text-lg text-gray-600">Análise interativa de carros até R$ 60.000, com foco em acabamento, conforto e custo-benefício.</p>
+        </header>
+
+        <!-- Ranking -->
+        <section class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Ranking: A Escolha Inteligente</h2>
+            <div id="ranking-table-container"></div>
+        </section>
+
+        <!-- Comparativo Visual -->
+        <section class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Comparativo Visual</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold mb-2">Perfil Geral (Radar)</h3>
+                    <canvas id="radarChart"></canvas>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2">Preço de Mercado (Estimado)</h3>
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Análises detalhadas, comparações, etc. -->
+        <!-- Você pode expandir com cards de carros, análises, etc. conforme desejar -->
+
+    </div>
+    <script>
+        // Exemplo de dados dos carros
+        const carData = {
+            corolla: { name: 'Toyota Corolla', scores: { total: 43 }, price: 78000 },
+            civic: { name: 'Honda Civic', scores: { total: 42 }, price: 68000 },
+            city: { name: 'Honda City', scores: { total: 39 }, price: 58000 },
+            fluence: { name: 'Renault Fluence', scores: { total: 39 }, price: 54000 },
+            focus: { name: 'Ford Focus', scores: { total: 33.5 }, price: 55000 },
+            '308': { name: 'Peugeot 308', scores: { total: 37 }, price: 52000 },
+            azera: { name: 'Hyundai Azera', scores: { total: 39.5 }, price: 65000 }
+        };
+
+        // Monta a tabela de ranking
+        function createRankingTable() {
+            const ranked = Object.entries(carData).sort((a, b) => b[1].scores.total - a[1].scores.total);
+            let html = `<table class="w-full text-sm text-left text-gray-500"><thead><tr>
+                <th>Rank</th><th>Modelo</th><th>Pontuação</th><th>Preço</th></tr></thead><tbody>`;
+            ranked.forEach(([key, car], i) => {
+                html += `<tr class="bg-white border-b">
+                    <td>${i + 1}º</td>
+                    <td>${car.name}</td>
+                    <td>${car.scores.total}</td>
+                    <td>R$ ${car.price.toLocaleString()}</td>
+                </tr>`;
+            });
+            html += `</tbody></table>`;
+            document.getElementById('ranking-table-container').innerHTML = html;
+        }
+        createRankingTable();
+
+        // Gráficos (exemplo)
+        new Chart(document.getElementById('radarChart'), {
+            type: 'radar',
+            data: {
+                labels: ['Acabamento', 'Conforto', 'Custo de Uso', 'Performance', 'Confiabilidade'],
+                datasets: [{
+                    label: 'Corolla',
+                    data: [8, 9, 9, 7, 10],
+                    backgroundColor: 'rgba(59,130,246,0.2)',
+                    borderColor: 'rgba(59,130,246,1)'
+                }]
+            }
+        });
+        new Chart(document.getElementById('priceChart'), {
+            type: 'bar',
+            data: {
+                labels: Object.values(carData).map(c => c.name),
+                datasets: [{
+                    label: 'Preço (R$)',
+                    data: Object.values(carData).map(c => c.price),
+                    backgroundColor: 'rgba(16,185,129,0.5)'
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
