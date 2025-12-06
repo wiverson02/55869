@@ -1,0 +1,13 @@
+src/model/Curso.java
+src/model/Aluno.java
+src/model/Professor.java
+src/model/Turma.java
+src/model/Avaliacao.java
+src/model/CursoPresencial.java
+src/model/CursoEAD.java
+src/model/Autenticacao.java
+src/model/Usuario.java
+src/model/Administrador.java
+src/service/ServicoAcademico.java
+src/repository/RepositorioGeral.java
+src/ui/Main.java
