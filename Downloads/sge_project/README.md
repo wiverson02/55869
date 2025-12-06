@@ -58,4 +58,3 @@ Daniel Wiverson Santos de Moura — Aluno Unicesumar (ADS)
 
 ---
 
-Se quiser, posso adicionar um arquivo `LICENSE` (por exemplo MIT) ou ajustar este `README` com mais detalhes (ex.: exemplos de uso, screenshots, diagrama de classes).
